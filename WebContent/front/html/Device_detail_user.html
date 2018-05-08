@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Devices | Smart Lock</title>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="css/modern-business.css" rel="stylesheet">
+<!-- Custom Fonts -->
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="Main_user.html">Smart Lock</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="Main_user.html">Home</a></li>
+					<li class="active"><a href="Device_user.html">Device</a></li>
+					<li><a href="License_user.html">License</a></li>
+					<li><a href="Download_user.html">Download</a></li>
+					<li><a href="Q&A_user.html">Q&A</a></li>
+					<li><a href="Notice_user.html">Notice</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><span
+							class="glyphicon glyphicon-user pull-leftt"></span></a>
+						<ul class="dropdown-menu">
+                            <li><br>
+                                <div class="col-md-5">
+                                    <img class="img-responsive" style="margin-left: 15px; margin-right: 20px" align="left" width="100px" src=".\img\profile.png" alt=""></div>
+                                <div class="col-md-7">
+                                    <h4>홍길동 님</h4>
+                                    <h5>example@google.com</h5>
+                                    <a class="btn btn-sm btn-default btn-block" href="Profile_user.html">마이페이지</a>
+                                    <br>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="Log_out.html">로그아웃</a></li>
+                        </ul>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+
+	<!-- Page Content -->
+	<div class="container">
+		<!-- Service Panels -->
+		<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="page-header">내 디바이스 관리</h2>
+			</div>
+			<!-- 검색필터-->
+			<div class="row">
+			<div class="col-sm-12">
+				<div class="col-sm-2">
+					<div class="input-group">
+						<select name="" id="location1"
+						style="width: 180px; height: 35px;">
+						<option value="">소프트웨어명</option>
+						<option value="">Microsoft Excel</option>
+						<option value="">Parallels Desktop</option>
+						<option value="">Adobe CC</option>
+						<option value="">Football Manager</option>
+					</select>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="input-group">
+						<select name="" id="location1"
+						style="width: 180px; height: 35px;">
+						<option value="">등록 날짜</option>
+						<option value="">오름차순</option>
+						<option value="">내림차순</option>
+					</select>
+					</div>
+				</div>
+				<div class="col-sm-6">
+				<input type="text" class="col-md-4" placeholder="검색어를 입력하세요"
+						id="searchField" style="width: 300px; height: 35px;">&nbsp;&nbsp;
+				<button class="btn btn-primary" type="button" id="searchButton"
+						data-loading-text="Searching..">
+						<i class="fa fa-search"></i>
+					</button>
+					</div>
+				</div>
+				
+			</div>
+			<br> <br>
+			<div class="col-md-3 col-sm-7">
+				<div class="panel panel-default text-center">
+					<div class="panel-heading">
+						<h3 data-bind="title">GD's Phone</h3>
+					</div>
+					<div class="panel-body">
+						<div>
+							<img data-bind="image" src=".\img\smartphone.png"
+								style="margin-left: auto; margin-right: auto; display: auto"
+								width="100px">
+                            <p></p>
+							<p>
+								<a href="#" class="btn btn-warning btn-filter"
+									style="width: 80px">수정</a>&nbsp; &nbsp; &nbsp;
+								<a href="#" class="btn btn-danger btn-filter" style="width: 80px">삭제</a>
+							</p>
+						</div>
+						<div>
+							<ul class="list-group text-center">
+								<li class="list-group-item"><b>장치명 :</b> <span data-bind="장치명">iPhone7 (mobile)</span></span></li>
+								<li class="list-group-item"><b>장치정보 :</b> <span data-bind="장치정보">DC9601-2792-2DD4</span></li>
+								<li class="list-group-item"><b>등록일 :</b> <span data-bind="등록일">2017 - 01 - 01</span></li>
+							</ul>
+							<a href="#" class="btn btn-default" style="width: 180px">라이센스 조회</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9 col-sm-7">
+			<table class="col-sm-12 table-bordered table-striped table-condensed cf">
+                		<thead class="cf" align="center">
+                			<tr>
+        						<td width="10px"><h4><b>No.</h4></td>
+								<td width="250px"><h4><b>소프트웨어</h4></td>
+								<td width="180px"><h4><b>장치명</h4></td>
+								<td width="200px"><h4><b>회사명</h4></td>
+								<td width="150px"><h4><b>시작일자</h4></td>
+								<td width="150px"><h4><b>만료기간</h4></td>
+								<td width="100px"><h4><b>상태</h4></td>
+                			</tr>
+                		</thead>
+                		<tbody align="center">
+                			<tr>
+        						<td data-title="No.">1</td>
+                				<td data-title="소프트웨어">Microsoft Excel</td>
+                				<td data-title="장치명">GD's Phone</td>
+                				<td data-title="회사명">Microsoft</td>
+                				<td data-title="시작일자">2016-11-31</td>
+                				<td data-title="만료기간">9999-99-99</td>
+                				<td data-title="상태"><span class="label label-success">발급 완료</span></td>
+                			</tr>
+                			<tr>
+        						<td data-title="No.">2</td>
+                				<td data-title="소프트웨어">Microsoft Excel</td>
+                				<td data-title="장치명">GD's Phone</td>
+                				<td data-title="회사명">Microsoft</td>
+                				<td data-title="시작일자">2016-11-31</td>
+                				<td data-title="만료기간">9999-99-99</td>
+                				<td data-title="상태"><span class="label label-success">발급 완료</span></td>
+                			</tr>
+                			<tr>
+        						<td data-title="No.">3</td>
+                				<td data-title="소프트웨어">Microsoft Excel</td>
+                				<td data-title="장치명">GD's Phone</td>
+                				<td data-title="회사명">Microsoft</td>
+                				<td data-title="시작일자">2016-11-31</td>
+                				<td data-title="만료기간">9999-99-99</td>
+                				<td data-title="상태"><span class="label label-success">발급 완료</span></td>
+                			</tr>
+                			<tr>
+        						<td data-title="No.">4</td>
+                				<td data-title="소프트웨어">Parallels Desktop</td>
+                				<td data-title="장치명">GD's Phone</td>
+                				<td data-title="회사명">Parallels International</td>
+                				<td data-title="시작일자">2017-03-21</td>
+                				<td data-title="만료기간">2017-04-21</td>
+                				<td data-title="상태"><span class="label label-success" onmouseout="this.style.background='#5cb85c';
+                				this.innerText='데모 버전';" onmouseover="this.style.background='#58ACFA';this.innerText='연장 요청';">데모 버전</span></td>
+                			</tr>
+                			<tr>
+        						<td data-title="No.">5</td>
+                				<td data-title="소프트웨어">Parallels Desktop</td>
+                				<td data-title="장치명">GD's Phone</td>
+                				<td data-title="회사명">Parallels International</td>
+                				<td data-title="시작일자">2017-03-21</td>
+                				<td data-title="만료기간">2017-04-21</td>
+                				<td data-title="상태"><span class="label label-success" onmouseout="this.style.background='#5cb85c';
+                				this.innerText='데모 버전';" onmouseover="this.style.background='#58ACFA';this.innerText='연장 요청';">데모 버전</span></td>
+                			</tr>
+                			
+
+            		</tbody>
+            	</table>
+			</div>
+			<hr>
+		</div>
+		<div class="row"></div>
+
+		<hr>
+	</div>
+	<!-- Footer -->
+	<footer class="text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<p>
+					서울특별시 서초구 양재대로2길 90, 아세아타워 TEL : 02-971-0321 FAX : 02-527-0321 <br>
+					사업자등록번호 : 220-88-03210 캐드서브(주) 대표이사 : 김형준 <br> Copyright ⓒ
+					Cadserv co., LTD.all rights reserved.
+				</p>
+			</div>
+		</div>
+	</footer>
+	<!-- jQuery -->
+	<script src="js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

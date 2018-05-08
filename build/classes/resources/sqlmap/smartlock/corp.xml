@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="corp">
+    <insert id="insertCorp" parameterType="smartlock.member.vo.CorpVO">
+    	INSERT INTO corp (
+    		corp_name
+    		,phone
+    	)
+    	VALUES (
+    		#{corp_name}
+    		,#{phone}
+    	)
+    </insert>
+    
+    <select id="selectCorp"
+            parameterType="String"
+            resultType="smartlock.member.vo.CorpVO">
+        SELECT id
+            , corp_name
+            , phone
+        FROM corp
+        WHERE corp_name LIKE CONCAT('%',#{corp_name},'%')
+    </select>
+    
+    <select id="corpName"
+    		parameterType="smartlock.member.vo.CorpVO"
+    		resultType="String">
+    	SELECT MAX(corp_name)
+    	FROM corp
+    	WHERE id=#{value}
+    </select>
+</mapper>

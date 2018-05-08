@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Main">
+    <meta name="author" content="">
+    <title>Statistics | Smart Lock</title>
+    <!-- graph css-->
+    <link rel="stylesheet" type="text/css" href="css/vGraph.css">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <!-- Statistics CSS -->
+    <link href="css/statistics.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="Main_manager.html">Smart Lock</a> </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="Main_manager.html">Home</a></li>
+                    <li class="active"><a href="Statistics_manager.html">Statistics</a></li>
+                    <li><a href="License_manager.html">License</a></li>
+                    <li><a href="Q&A_manager.html">Q&A</a></li>
+                    <li><a href="Notice_manager.html">Notice</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+							class="glyphicon glyphicon-user pull-leftt"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><br>
+                                <div class="col-md-5">
+                                    <img class="img-responsive" style="margin-left: 15px; margin-right: 20px" align="left" width="100px" src=".\img\profile.png" alt=""></div>
+                                <div class="col-md-7">
+                                    <h4>홍길동 님</h4>
+                                    <h5>example@google.com</h5>
+                                    <a class="btn btn-sm btn-default btn-block" href="Profile_manager.html">마이페이지</a>
+                                    <br>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="Log_out.html">로그아웃</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Header Carousel -->
+    <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">통계
+                    <small>월별 발급 현황</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="Statistics_manager.html">License 사용 통계</a></li>
+                    <li class="active">월별 License 발급 현황</li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-sm-12" align="left">
+                <div class="input-group">
+                    <select name="" id="location1" style="width: 180px; height: 35px;">
+                        <option value="">전체보기</option>
+                        <option value="">Microsoft Excel</option>
+                        <option value="">Parallels Desktop</option>
+                        <option value="">Adobe CC</option>
+                        <option value="">Football Manager</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="col-sm-12">
+            <div class="vGraph">
+                <ul>
+                    <li><span class="gTerm">1월</span><span class="gBar" style="height:0%"><span>0%</span></span>
+                    </li>
+                    <li><span class="gTerm">2월</span><span class="gBar" style="height:20%"><span>20%</span></span>
+                    </li>
+                    <li><span class="gTerm">3월</span><span class="gBar" style="height:30%"><span>30%</span></span>
+                    </li>
+                    <li><span class="gTerm">4월</span><span class="gBar" style="height:40%"><span>40%</span></span>
+                    </li>
+                    <li><span class="gTerm">5월</span><span class="gBar" style="height:50%"><span>50%</span></span>
+                    </li>
+                    <li><span class="gTerm">6월</span><span class="gBar" style="height:60%"><span>60%</span></span>
+                    </li>
+                    <li><span class="gTerm">7월</span><span class="gBar" style="height:100%"><span>100%</span></span>
+                    </li>
+                    <li><span class="gTerm">8월</span><span class="gBar" style="height:80%"><span>80%</span></span>
+                    </li>
+                    <li><span class="gTerm">9월</span><span class="gBar" style="height:60%"><span>60%</span></span>
+                    </li>
+                    <li><span class="gTerm">10월</span><span class="gBar" style="height:40%"><span>40%</span></span>
+                    </li>
+                    <li><span class="gTerm">11월</span><span class="gBar" style="height:20%"><span>20%</span></span>
+                    </li>
+                    <li><span class="gTerm">12월</span><span class="gBar" style="height:10%"><span>10%</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- /.row -->
+
+        <br>
+        <div class="row">
+            <hr>
+        </div>
+        <!-- Footer -->
+        <footer class="text-center">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p> 서울특별시 서초구 양재대로2길 90, 아세아타워 TEL : 02-971-0321 FAX : 02-527-0321
+                        <br> 사업자등록번호 : 220-88-03210 캐드서브(주) 대표이사 : 김형준
+                        <br> Copyright ⓒ Cadserv co., LTD.all rights reserved. </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+</body>
+
+</html>

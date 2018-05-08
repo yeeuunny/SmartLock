@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Main">
+<meta name="author" content="">
+<title>License | Smart Lock</title>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="css/modern-business.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="Main_manager.html">Smart Lock</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="Main_manager.html">Home</a></li>
+					<li><a href="Statistics_manager.html">Statistics</a></li>
+					<li class="active"><a href="License_manager.html">License</a></li>
+					<li><a href="Q&A_manager.html">Q&A</a></li>
+					<li><a href="Notice_manager.html">Notice</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><span
+							class="glyphicon glyphicon-user pull-leftt"></span></a>
+						<ul class="dropdown-menu">
+							<li><br>
+								<div class="col-md-5">
+									<img class="img-responsive"
+										style="margin-left: 15px; margin-right: 20px" align="left"
+										width="100px" src=".\img\profile.png" alt="">
+								</div>
+								<div class="col-md-7">
+									<h4>홍길동 님</h4>
+									<h5>example@google.com</h5>
+									<a class="btn btn-sm btn-default btn-block"
+										href="Profile_manager.html">마이페이지</a> <br>
+								</div></li>
+							<li class="divider"></li>
+							<li><a href="Log_out.html">로그아웃</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+	<!-- Header Carousel -->
+	<div class="container">
+		<!-- Page Heading/Breadcrumbs -->
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">라이센스 관리
+				<small>발급 완료 현황</small>
+				</h1>
+			<ol class="breadcrumb">
+				<li><a href="License_manager.html">발급 대기 현황</a></li>
+				<li class="active">발급 완료 현황</li>
+			</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="col-sm-2">
+						<div class="input-group">
+							<select name="" id="location1"
+								style="width: 180px; height: 35px;">
+								<option value="">소프트웨어명</option>
+								<option value="">전체보기</option>
+								<option value="">Microsoft Excel</option>
+								<option value="">Parallels Desktop</option>
+								<option value="">Adobe CC</option>
+								<option value="">Football Manager</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="input-group">
+							<select name="" id="location1"
+								style="width: 180px; height: 35px;">
+								<option value="">만료 날짜</option>
+								<option value="">오름차순</option>
+								<option value="">내림차순</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="col-sm-6">
+						<input type="text" class="col-md-4" placeholder="검색어를 입력하세요"
+							id="searchField" style="width: 300px; height: 35px;">&nbsp;&nbsp;
+						<button class="btn btn-primary" type="button" id="searchButton"
+							data-loading-text="Searching..">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
+
+			</div>
+			<br>
+			<!-- 검색필터-->
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="text-center"></h2>
+				</div>
+				<div id="no-more-tables">
+					<table
+						class="col-sm-12 table-bordered table-striped table-condensed cf">
+						<thead class="cf" align="center">
+							<tr>
+								<td width="10px">
+									<h4>
+										<b>No.
+									</h4>
+								</td>
+								<td width="250px"><h4>
+										<b>소프트웨어명
+									</h4></td>
+								<td width="100px"><h4>
+										<b>이름
+									</h4></td>
+								<td width="100px"><h4>
+										<b>발급날짜
+									</h4></td>
+									<td width="100px"><h4>
+										<b>만료날짜
+									</h4></td>
+								<td width="150px"><h4>
+										<b>분류
+									</h4></td>
+								<td width="100px"><h4>
+										<b>상세보기
+									</h4></td>
+							</tr>
+						</thead>
+						<tbody align="center">
+							<tr>
+								<td data-title="No.">1</td>
+								<td data-title="소프트웨어">Microsoft Excel</td>
+								<td data-title="이름">박지성</td>
+								<td data-title="발급날짜">2017-01-01</td>
+								<td data-title="만료날짜">9999-01-01</td>
+								<td data-title="분류"><span class="label label-success">일반
+										신청</span></td>
+								<td data-title="상세보기"><a><span class="label"
+										style="background-color: darkgray; color: black">상세 보기</span></a></td>
+							</tr>
+							<tr>
+								<td data-title="No.">2</td>
+								<td data-title="소프트웨어">Microsoft Excel</td>
+								<td data-title="이름">이영표</td>
+								<td data-title="발급날짜">2017-02-02</td>
+								<td data-title="만료날짜">9999-01-01</td>
+								<td data-title="분류"><span class="label label-success">일반
+										신청</span></td>
+								<td data-title="상세보기"><a><span class="label"
+										style="background-color: darkgray; color: black">상세 보기</span></a></td>
+							</tr>
+							<tr>
+								<td data-title="No.">3</td>
+								<td data-title="소프트웨어">Microsoft Excel</td>
+								<td data-title="이름">차두리</td>
+								<td data-title="발급날짜">2017-03-03</td>
+								<td data-title="만료날짜">2017-04-03</td>
+								<td data-title="분류"><span class="label label-warning">데모
+										신청</span></td>
+								<td data-title="상세보기"><a><span class="label"
+										style="background-color: darkgray; color: black">상세 보기</span></a></td>
+							</tr>
+							<tr>
+								<td data-title="No.">4</td>
+								<td data-title="소프트웨어">Microsoft Excel</td>
+								<td data-title="이름">박주영</td>
+								<td data-title="발급날짜">2017-04-04</td>
+								<td data-title="만료날짜">2017-05-04</td>
+								<td data-title="분류"><span class="label label-warning">데모
+										신청</span></td>
+								<td data-title="상세보기"><a><span class="label"
+										style="background-color: darkgray; color: black">상세 보기</span></a></td>
+							</tr>
+							<tr>
+								<td data-title="No.">5</td>
+								<td data-title="소프트웨어">Football Manager</td>
+								<td data-title="이름">김남일</td>
+								<td data-title="발급날짜">2017-05-05</td>
+								<td data-title="만료날짜">9999-01-01</td>
+								<td data-title="분류"><span class="label label-success">일반
+										신청</span></td>
+								<td data-title="상세보기"><a><span class="label"
+										style="background-color: darkgray; color: black">상세 보기</span></a></td>
+							</tr>
+							<tr>
+								<td data-title="No.">6</td>
+								<td data-title="소프트웨어">Adobe CC</td>
+								<td data-title="이름">이근호</td>
+								<td data-title="신청날짜">2017-01-01</td>
+								<td data-title="만료날짜">9999-01-01</td>
+								<td data-title="분류"><span class="label label-success">일반
+										신청</span></td>
+								<td data-title="상세보기"><a><span class="label"
+										style="background-color: darkgray; color: black">상세 보기</span></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="row text-center">
+				<div class="col-lg-12">
+					<ul class="pagination">
+						<li><a href="#">&laquo;</a></li>
+						<li class="active"><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">&raquo;</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- /.row -->
+
+	<!-- /.row -->
+	<hr>
+	<!-- Footer -->
+	<footer class="text-center">
+		<div class="row">
+			<div class="col-lg-12">
+				<p>
+					서울특별시 서초구 양재대로2길 90, 아세아타워 TEL : 02-971-0321 FAX : 02-527-0321 <br>
+					사업자등록번호 : 220-88-03210 캐드서브(주) 대표이사 : 김형준 <br> Copyright ⓒ
+					Cadserv co., LTD.all rights reserved.
+				</p>
+			</div>
+		</div>
+	</footer>
+	</div>
+	<!-- /.container -->

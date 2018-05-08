@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="device">
+
+	<!-- 디바이스 등록 -->
+	<!--
+	TODO: 디바이스 등록 구현
+	<update id="addDevice"
+			parameterType="smartlock.device.vo.DeviceVO">
+		INSERT INTO user (...)
+        VALUES (...)
+	</update>
+	-->
+
+	<select id="selectDevice"
+			parameterType="java.util.Map"
+			resultType="smartlock.device.vo.DeviceVO">
+		SELECT id
+			,  nickname
+			,  reg_date
+			,  type
+			,  mac
+		FROM device
+	   WHERE user_id = #{userId}
+	     AND id = #{deviceId}
+	</select>
+
+	<select id="selectDeviceList"
+			parameterType="java.util.Map"
+			resultType="smartlock.device.vo.DeviceVO">
+		SELECT id
+			,  nickname
+			,  reg_date
+			,  type
+			,  mac
+		FROM device
+	   WHERE user_id = #{id}
+	   ORDER BY ${order};
+	   
+	</select>
+
+	<select id="selectDeviceBySw"
+			parameterType="java.util.Map"
+			resultType="smartlock.device.vo.DeviceVO">
+		SELECT d.id
+			,  s.sw_name
+			,  d.nickname
+			,  d.reg_date
+			,  d.type
+			,  d.mac
+		FROM device d, software s
+	   WHERE d.user_id = #{id}
+         AND s.id = d.sw_id
+	     AND sw_id = (SELECT id
+	   	 				  FROM software
+	   	 			     WHERE sw_name = #{sw})
+	   ORDER BY ${order};
+	   <!-- sw_name을 sw_id로 바꾸는것을 권장 -->
+	</select>
+	
+	<select id="selectDeviceSwList"
+			parameterType="String"
+			resultType="String">
+		SELECT DISTINCT s.sw_name
+		  FROM device d, software s
+		 WHERE d.user_id = #{id}
+		   AND d.sw_id is not null
+		   AND s.id = d.sw_id;
+	</select>
+
+	<select id="selectLicense"
+			parameterType="java.util.Map"
+			resultType="smartlock.license.vo.LicenseUserVO">
+		SELECT s.sw_name
+			,  l.start_date
+			,  l.end_date
+			,  l.state
+			,  c.corp_name
+			,  l.sw_id
+		  FROM license l, device d, corp c, software s
+		 WHERE d.nickname = (SELECT nickname
+		 					   FROM device
+		 					  WHERE user_id = #{userId}
+		 					    AND id = #{deviceId})
+		   AND d.user_id = l.user_id
+           AND l.sw_id = s.id
+           AND d.sw_id = s.id
+           AND s.corp_id = c.id;
+	</select>
+
+	<!-- 디바이스 제거 -->
+	<delete id="deleteDevice"
+			parameterType="Integer">
+		DELETE FROM device
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 디바이스 닉네임 업데이트 -->
+	<update id="updateDeviceNickname"
+			parameterType="smartlock.device.vo.DeviceVO">
+		UPDATE device
+		SET nickname = #{nickname}
+		WHERE id = #{id};
+	</update>
+</mapper>

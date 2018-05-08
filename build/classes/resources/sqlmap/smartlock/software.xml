@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="software">
+
+    <select id="softwareList"
+            resultType="java.util.Map">
+        SELECT *
+        FROM software
+		ORDER BY sw_name ASC;
+    </select>
+    
+    <select id="softwareListUser" parameterType="java.util.Map"
+            resultType="java.util.Map">
+       SELECT * 
+       FROM software
+       WHERE corp_id = #{corp_id}
+       AND id NOT IN(SELECT sw_id FROM license WHERE user_id = #{user_id})
+       AND id NOT IN(SELECT sw_id FROM req_license WHERE state != 3 AND user_id=#{user_id})
+       ORDER BY sw_name ASC;
+    </select>
+    
+    <select id="softwareListByCorp" parameterType="Integer"
+            resultType="java.util.Map">
+        SELECT *
+        FROM software
+        WHERE corp_id = #{value}
+		ORDER BY sw_name ASC;
+    </select>
+    
+    <select id="softwareSelect"  parameterType="String"
+            resultType="smartlock.software.vo.SoftwareReqVO">
+        SELECT s.id
+        	, c.corp_name
+        	, s.sw_name
+        FROM software s,
+        	corp c
+        WHERE s.id = #{sw_id}
+        AND s.corp_id = c.id;
+    </select>
+    
+    <select id="selectByCorp" parameterType="String"
+            resultType="smartlock.software.vo.SoftwareReqVO">
+        SELECT id
+        	,sw_name
+        	,corp_id
+       	 FROM software
+        WHERE corp_id = #{corp_id}
+       	ORDER BY sw_name ASC;
+   </select>
+    
+    <select id="softwareFinal"  parameterType="java.util.Map"
+            resultType="java.lang.Integer">
+        INSERT INTO req_license (user_id, request_date, sw_id, state) 
+        VALUES(#{id}, CURDATE(), #{sw_id}, #{state});
+    </select>
+    
+    <!--  <select id="getCorp"  parameterType="Integer"
+            resultType="smartlock.software.vo.SoftwareVO">
+      	SELECT s.id
+      		,  s.sw_name
+      		,  c.corp_name
+      	FROM corp c, software s
+      	WHERE c.id = s.corp_id
+      	AND c.id = #{corp_id}
+      	ORDER BY sw_name ASC;
+      	  
+    </select>
+     -->
+      <select id="getCorp"  parameterType="Integer"
+            resultType="java.lang.String">
+      	SELECT c.corp_name
+      	FROM corp c
+      	WHERE c.id = #{corp_id}
+      	  
+    </select>
+    
+     <select id="insertSoftware" parameterType="java.util.Map"  
+      		resultType="java.lang.Integer"> 
+      INSERT INTO software(id, sw_name, corp_id, version, img, proc_name, info) 
+      VALUES(#{id}, #{sw_name}, #{corp_id}, #{version}, #{img}, #{proc_name}, #{info}) 
+    </select> 
+</mapper>

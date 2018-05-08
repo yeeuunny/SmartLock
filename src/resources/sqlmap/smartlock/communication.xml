@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="communication">
+	
+	<select id="getMac" parameterType="String"
+		resultType="String">
+		SELECT mac
+		FROM device
+		WHERE user_id = #{id};
+	</select>
+	
+	<!-- <select id="getSoftwareList" parameterType="java.util.Map"
+		resultType="String">
+		SELECT proc_name
+		FROM software 
+		WHERE id = ANY(SELECT sw_id FROM device WHERE user_id = #{id} AND mac = #{mac})
+        AND corp_id = (SELECT corp_id FROM user WHERE id = #{id});
+	</select> -->
+	
+	<select id="getSoftware" parameterType="java.util.Map"
+		resultType="String">
+		SELECT proc_name
+		FROM software 
+		WHERE id = ANY(SELECT sw_id FROM device WHERE user_id = #{id} AND mac = #{mac})
+        AND corp_id = (SELECT corp_id FROM user WHERE id = #{id})
+        AND proc_name = #{proc_name};
+	</select>
+	
+	<select id="getNicknameList" parameterType="String"
+		resultType="String">
+		SELECT nickname
+		FROM device 
+		WHERE user_id = #{id};
+	</select>
+	
+	<select id="getAllSoftwareList" parameterType="String"
+		resultType="String">
+		SELECT proc_name
+		FROM software 
+		WHERE corp_id = (SELECT corp_id FROM user WHERE id = #{id});
+	</select>
+	
+	<insert id="addDevice" parameterType="java.util.Map">
+		INSERT INTO device (user_id, nickname, reg_date, type, mac)
+		VALUES (#{user_id}, #{nickname}, CURDATE(), #{type}, #{mac});
+	</insert>
+	
+	<select id="getCount" parameterType="Integer"
+		resultType="String">
+		SELECT device_count
+		FROM user 
+		WHERE id=#{id};
+	</select>
+	
+	<update id="decreaseCount" parameterType="String">
+		UPDATE user
+		SET device_count = device_count-1
+		WHERE id = #{id};
+	</update>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+	
+	<bean id="egov.propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/resources/properties/globals.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="dataSource-mysql" alias="dataSourceMySQL" />
+	
+	<!-- MySQL -->
+	<bean id="dataSource-mysql" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="core.log.jdbc.driver.MysqlDriver" />
+		<property name="url" value="jdbc:mysql://211.253.25.68:3306/smartlock" />
+		<property name="username" value="root" />
+		<property name="password" value="smtl1130@" />
+		<property name="validationQuery" value="select 1 from dual" />
+	</bean>
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://211.253.25.68:3306" />
+        <property name="username" value="root" />
+        <property name="password" value="smtl1130@" />
+    </bean> -->
+
+</beans>

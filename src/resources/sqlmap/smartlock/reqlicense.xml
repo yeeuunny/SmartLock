@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reqlicense">
+    <insert id="insert"
+            parameterType="smartlock.reqlicense.vo.ReqLicenseVO">
+        INSERT INTO req_license (user_id
+            , request_date
+            , sw_id
+            , state)
+        VALUES (#{user_id}
+            , NOW()
+            , #{sw_id}
+            , #{state})
+    </insert>
+</mapper>

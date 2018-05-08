@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="license">
+	
+	<select id="findDemo" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseUserVO">
+		SELECT *
+		 FROM license
+		WHERE user_id = #{req_id}
+		  AND sw_id = #{id}
+		  AND state = '3'
+	</select>
+	
+	<update id="updateDemo" parameterType="java.util.Map">
+		UPDATE license
+		SET state = '1'
+		WHERE user_id = #{req_id}
+ 		AND sw_id = #{id};
+	</update>
+	
+	<update id="updateDemo2" parameterType="java.util.Map">
+		UPDATE license
+		SET end_date = '9999-00-00'
+		WHERE user_id = #{req_id}
+ 		AND sw_id = #{id};
+	</update>
+	
+	<update id="extendRequest" parameterType="java.util.Map">
+		UPDATE license
+		SET state = '3'
+		WHERE user_id = #{id}
+ 		AND sw_id = #{sw_id};
+	</update>
+	
+	<update id="reject" parameterType="java.util.Map">
+		UPDATE req_license
+		SET state = '3'
+		WHERE user_id = #{id}
+ 		AND sw_id = #{sw_id};
+	</update>
+	
+	<update id="licenseCheck" parameterType="java.util.Map">
+		UPDATE device
+		SET sw_id = #{sw_id}
+		WHERE sw_id is null
+ 		AND mac = #{mac};
+	</update>
+	
+	<insert id="copyLicense" parameterType="java.util.Map">
+		INSERT INTO device (user_id, nickname, reg_date, type, mac)
+ 		SELECT  user_id, nickname, reg_date,  type, mac
+ 		FROM device
+ 		WHERE mac = #{mac}
+ 		ORDER BY reg_date LIMIT 1;
+	</insert>
+	
+	<update id="updateCount" parameterType="java.util.Map">
+		UPDATE license
+ 		   SET device_count = device_count-1
+ 		 WHERE user_id = #{id}
+ 		   AND sw_id = #{sw_id};
+	</update>
+	
+	<select id="selectDeviceListBySw" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.DeviceRequestVO">
+		SELECT distinct mac
+			, type
+			, nickname
+		 FROM device
+		WHERE user_id = #{id}
+		  AND (not sw_id = #{sw_id}
+		   OR sw_id is null);
+	</select>
+	
+	<!-- 개인 발급완료 라이센스 전체 조회 -->
+	<select id="selectLicense" parameterType="String"
+		resultType="smartlock.license.vo.LicenseUserVO">
+		SELECT s.sw_name
+			, c.corp_name
+			, l.start_date
+			, l.end_date
+			, l.state
+			, l.sw_id
+			, l.device_count
+		FROM software s
+			, corp c
+			, license l
+		WHERE l.user_id = #{value}
+		AND l.sw_id = s.id
+		AND s.corp_id = c.id
+        AND end_date >= CURDATE()
+		ORDER BY s.sw_name ASC;
+	</select>
+	
+	<!-- 개인 발급완료 라이센스 전체 조회 정렬  -->
+	<select id="selectLicenseOrder" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseUserVO">
+		SELECT s.sw_name
+			, c.corp_name
+			, l.start_date
+			, l.end_date
+			, l.state
+			, l.sw_id
+			, l.device_count
+		FROM software s
+			, corp c
+			, license l
+		WHERE l.user_id = #{id}
+		AND l.sw_id = s.id
+		AND s.corp_id = c.id
+		AND end_date >= CURDATE()
+		ORDER BY l.end_date ${order};
+	</select>
+	
+	<!-- 소프트웨어명으로 발급완료 라이센스 조회 -->
+	<select id="selectLicenseByName" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseUserVO">
+		SELECT s.sw_name
+			, c.corp_name
+			, l.start_date
+			, l.end_date
+			, l.state
+			, l.sw_id
+			, l.device_count
+		FROM software s
+			, corp c
+			, license l
+		WHERE l.user_id = #{id}
+		AND l.sw_id = s.id
+		AND s.corp_id = c.id
+		AND l.sw_id = #{sw_id}
+		AND end_date >= CURDATE()
+		ORDER BY s.sw_name ASC;
+	</select>
+	
+	
+	<!-- 소프트웨어명으로 발급완료 라이센스 조회 정렬-->
+	<select id="selectLicenseByNameOrder" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseUserVO">
+		SELECT s.sw_name
+			, c.corp_name
+			, l.start_date
+			, l.end_date
+			, l.state
+			, l.sw_id
+			, l.device_count
+		FROM software s
+			, corp c
+			, license l
+		WHERE l.user_id = #{id}
+		AND l.sw_id = s.id
+		AND s.corp_id = c.id
+		AND l.sw_id = #{sw_id}
+		AND end_date >= CURDATE()
+		ORDER BY l.end_date ${order};
+	</select>
+	
+	<!-- 개인 요청 라이센스 전체 조회 -->
+	<select id="selectReqLicense" parameterType="String"
+		resultType="smartlock.license.vo.LicenseUserReqVO">
+		SELECT s.sw_name
+			, c.corp_name
+			, l.request_date
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, req_license l
+		WHERE l.user_id = #{value}
+		AND l.sw_id = s.id
+		AND s.corp_id = c.id
+		ORDER BY s.sw_name ASC;
+	</select>
+	
+	<!-- 개인 요청 라이센스 전체 조회 정렬-->
+	<select id="selectReqLicenseOrder" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseUserReqVO">
+		SELECT s.sw_name
+			, c.corp_name
+			, l.request_date
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, req_license l
+		WHERE l.user_id = #{id}
+		AND l.sw_id = s.id
+		AND s.corp_id = c.id
+		ORDER BY l.request_date ${order};
+	</select>
+	
+	<!-- 개인 요청 라이센스 소프트웨어명 별 조회 -->
+	<select id="selectReqLicenseByName" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseUserReqVO">
+		SELECT s.sw_name
+			, c.corp_name
+			, l.request_date
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, req_license l
+		WHERE l.user_id = #{id}
+		AND l.sw_id = s.id
+		AND s.corp_id = c.id
+		AND l.sw_id =  #{sw_id}
+		ORDER BY s.sw_name ASC;
+	</select>
+	
+	<!-- 개인 요청 라이센스 소프트웨어명 별 조회 정렬 -->
+	<select id="selectReqLicenseByNameOrder" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseUserReqVO">
+		SELECT s.sw_name
+			, c.corp_name
+			, l.request_date
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, req_license l
+		WHERE l.user_id = #{id}
+		AND l.sw_id = s.id
+		AND s.corp_id = c.id
+		AND l.sw_id =  #{sw_id}
+		ORDER BY l.request_date ${order};
+	</select>
+	
+	
+	
+	<!-- 관리자 요청 라이센스 전체 조회 -->
+	<select id="selectManagerReqLicense" parameterType="String"
+		resultType="smartlock.license.vo.LicenseManagerReqVO">
+		SELECT s.sw_name
+			, u.user_name
+			, c.corp_name
+			, l.request_date
+			, u.id
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, req_license l
+			, user u
+		WHERE c.id = (SELECT corp_id FROM user WHERE id = #{id})
+		AND s.corp_id = c.id
+		AND l.sw_id = s.id
+		AND u.id = l.user_id
+		ORDER BY s.sw_name ASC;
+	</select>
+	
+	<!-- 관리자 요청 라이센스 전체 조회 정렬-->
+	<select id="selectManagerReqLicenseOrder" parameterType="String"
+		resultType="smartlock.license.vo.LicenseManagerReqVO">
+		SELECT s.sw_name
+			, u.user_name
+			, c.corp_name
+			, l.request_date
+			, u.id
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, req_license l
+			, user u
+		WHERE c.id = (SELECT corp_id FROM user WHERE id = #{id})
+		AND s.corp_id = c.id
+		AND l.sw_id = s.id
+		AND u.id = l.user_id
+		ORDER BY l.request_date ${order};
+	</select>
+	
+	<!-- 관리자 요청 라이센스 소프트웨어명별 조회 -->
+	<select id="selectManagerReqLicenseByName" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseManagerReqVO">
+		SELECT s.sw_name
+			, u.user_name
+			, c.corp_name
+			, l.request_date
+			, u.id
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, req_license l
+			, user u
+		WHERE c.id = (SELECT corp_id FROM user WHERE id = #{id})
+		AND s.corp_id = c.id
+		AND l.sw_id = s.id
+		AND u.id = l.user_id
+		AND s.id = #{sw_id}
+		ORDER BY s.sw_name ASC;
+	</select>
+	
+	
+	<!-- 관리자 요청 라이센스 소프트웨어명별 조회 정렬-->
+	<select id="selectManagerReqLicenseByNameOrder" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseManagerReqVO">
+		SELECT s.sw_name
+			, u.user_name
+			, c.corp_name
+			, l.request_date
+			, u.id
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, req_license l
+			, user u
+		WHERE c.id = (SELECT corp_id FROM user WHERE id = #{id})
+		AND s.corp_id = c.id
+		AND l.sw_id = s.id
+		AND u.id = l.user_id
+		AND s.id = #{sw_id}
+		ORDER BY l.request_date ${order};
+	</select>
+	
+	<!-- 관리자 발급완료 라이센스 전체 조회 -->
+	<select id="selectManagerLicense" parameterType="String"
+		resultType="smartlock.license.vo.LicenseManagerVO">
+		SELECT s.sw_name
+			, u.user_name
+			, c.corp_name
+			, l.start_date
+			, l.end_date
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, license l
+			, user u
+		WHERE c.id = (SELECT corp_id FROM user WHERE id = #{id})
+		AND s.corp_id = c.id
+		AND l.sw_id = s.id
+		AND u.id = l.user_id
+		ORDER BY s.sw_name ASC;
+	</select>
+	
+	<select id="selectManagerLicenseOrder" parameterType="String"
+		resultType="smartlock.license.vo.LicenseManagerVO">
+		SELECT s.sw_name
+			, u.user_name
+			, c.corp_name
+			, l.start_date
+			, l.end_date
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, license l
+			, user u
+		WHERE c.id = (SELECT corp_id FROM user WHERE id = #{id})
+		AND s.corp_id = c.id
+		AND l.sw_id = s.id
+		AND u.id = l.user_id
+		ORDER BY l.end_date ${order};
+	</select>
+	
+	<!-- 관리자 발급완료 라이센스 소프트웨어명별 조회 -->
+	<select id="selectManagerLicenseByName" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseManagerVO">
+		SELECT s.sw_name
+			, u.user_name
+			, c.corp_name
+			, l.start_date
+			, l.end_date
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, license l
+			, user u
+		WHERE c.id = (SELECT corp_id FROM user WHERE id = #{id})
+		AND s.corp_id = c.id
+		AND l.sw_id = s.id
+		AND u.id = l.user_id
+		AND s.id = #{sw_id}
+		ORDER BY s.sw_name ASC;
+	</select>
+	
+	<!-- 관리자 발급완료 라이센스 소프트웨어명별 조회 정렬-->
+	<select id="selectManagerLicenseByNameOrder" parameterType="java.util.Map"
+		resultType="smartlock.license.vo.LicenseManagerVO">
+		SELECT s.sw_name
+			, u.user_name
+			, c.corp_name
+			, l.start_date
+			, l.end_date
+			, l.state
+			, l.sw_id
+		FROM software s
+			, corp c
+			, license l
+			, user u
+		WHERE c.id = (SELECT corp_id FROM user WHERE id = #{id})
+		AND s.corp_id = c.id
+		AND l.sw_id = s.id
+		AND u.id = l.user_id
+		AND s.id = #{sw_id}
+		ORDER BY l.end_date ${order};
+	</select>
+	
+	<insert id="permitFull" parameterType="java.util.Map">
+		INSERT INTO license (user_id, start_date, end_date, sw_id, state)
+		VALUES (#{req_id}, CURDATE(), '9999-00-00', #{id}, '1');
+	</insert>
+	
+	<insert id="permitDemo" parameterType="java.util.Map">
+		INSERT INTO license (user_id, start_date, end_date, sw_id, state)
+		VALUES (#{req_id}, CURDATE(), ADDDATE(CURDATE(), INTERVAL 30 DAY), #{id}, '2');
+	</insert>
+	
+	<delete id="permitDelete" parameterType="java.util.Map">
+		DELETE FROM req_license
+		WHERE user_id = #{req_id}
+		AND sw_id = #{id};
+	</delete>
+	
+	<insert id="licenseUserReqDemo" parameterType="java.util.Map">
+		INSERT INTO req_license (user_id, request_date, sw_id, state)
+		VALUES (#{id}, CURDATE(), #{sw_id}, '1');
+	</insert>
+	
+	
+</mapper>

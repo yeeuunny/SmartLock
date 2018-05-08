@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+    <!-- 공통 코드 목록조회 -->
+    <select id="selectTest" parameterType="smartlock.test.vo.TestVO"
+            resultType="smartlock.test.vo.TestVO">
+        SELECT id,
+        password,
+        authority,
+        phone_number,
+        email,
+        corp_id
+        FROM user
+        WHERE phone_number = '010-0000-0000'
+    </select>
+</mapper>

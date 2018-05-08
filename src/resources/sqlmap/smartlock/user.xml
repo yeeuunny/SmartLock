@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+
+    <select id="selectUser"
+            parameterType="String"
+            resultType="smartlock.member.vo.UserVO">
+        SELECT id
+            , password
+            , authority
+            , phone_number
+            , email
+            , corp_id
+            , user_name
+        FROM user
+        WHERE id = #{value}
+    </select>
+
+    <select id="userInfo"
+            parameterType="String"
+            resultType="smartlock.member.vo.UserInfoVO">
+        SELECT user.id as id
+            , user.user_name as user_name
+            , user.authority as authority
+            , user.email as email
+            , user.phone_number as phone
+            , corp.corp_name as company
+        FROM user
+        LEFT JOIN corp
+        ON corp.id = user.corp_id
+        WHERE user.id = #{value}
+    </select>
+
+    <insert id="insertUser"
+            parameterType="smartlock.member.vo.UserVO">
+        INSERT INTO user (id
+            , password
+            , user_name
+            , authority
+            , phone_number
+            , email
+            , corp_id)
+        VALUES (#{id}
+            , #{password}
+            , #{user_name}
+            , #{authority}
+            , #{phoneNumber}
+            , #{email}
+            , #{corpId})
+    </insert>
+    
+    <update id="updateUser" 
+    		parameterType="smartlock.member.vo.UserVO">
+    	UPDATE user
+		SET email=#{email}, phone_number=#{phoneNumber}
+		WHERE id=#{id} AND password=#{password};
+    </update>
+    
+    <update id="changePassword" 
+    		parameterType="smartlock.profile.vo.PasswordVO">
+    	UPDATE user
+		SET password=#{new_password}
+		WHERE id=#{id} AND password=#{password}
+    </update>
+    
+    
+    <delete id="removeUser"
+    		parameterType="smartlock.member.vo.UserVO">
+    	DELETE
+    	FROM user
+    	WHERE id=#{id} AND password=#{password}
+    </delete>
+    
+    <update id="changeRanPassword"
+    		parameterType="smartlock.searchpw.vo.SearchpwVO">
+    	UPDATE user
+    	SET password=#{password}
+    	WHERE id=#{id}
+    </update>
+    
+    <select id="checkEmail"
+    		parameterType="smartlock.searchpw.vo.EmailVO"
+    		resultType="String">
+    	SELECT MAX(email)
+    	FROM user
+    	WHERE id=#{id} AND email=#{email}
+    </select>
+    
+    <select id="selectPassword" 
+    		parameterType="String" 
+    		resultType="String">
+    	SELECT password
+    	FROM user
+    	WHERE id=#{id}
+    </select>
+</mapper>

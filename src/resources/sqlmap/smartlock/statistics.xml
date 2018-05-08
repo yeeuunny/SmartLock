@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="statistics">
+	
+	<!-- 요청라이센스 count  -->
+	<select id="countReqLicense" parameterType="String"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM req_license
+		WHERE sw_id = ANY(SELECT id FROM software WHERE corp_id = 
+		(SELECT corp_id FROM user WHERE id = #{id}));
+	</select>
+	
+	<!-- 발급완료 라이센스 count  -->
+	<select id="countLicense" parameterType="String"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM license
+		WHERE sw_id = ANY(SELECT id FROM software WHERE corp_id = 
+			(SELECT corp_id FROM user WHERE id = #{id}))
+		AND state = '1';
+	</select>
+	
+	<!-- 데모 라이센스 count  -->
+	<select id="countDemo" parameterType="String"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM license
+		WHERE sw_id = ANY(SELECT id FROM software WHERE corp_id = 
+			(SELECT corp_id FROM user WHERE id = #{id}))
+		AND state = '2';
+	</select>
+	
+	<!-- 요청라이센스 소프트웨어명별 count  -->
+	<select id="countReqLicenseByName" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		 FROM req_license
+		WHERE sw_id = #{sw_id}
+		  AND sw_id = #{sw_id};
+	</select>
+	
+	<!-- 발급완료 라이센스 소프트웨어명별 count  -->
+	<select id="countLicenseByName" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		  FROM license
+		 WHERE sw_id = #{sw_id}
+		   AND state = '1';
+	</select>
+	
+	<!-- 데모 라이센스 소프트웨어명별 count  -->
+	<select id="countDemoByName" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		  FROM license
+		 WHERE sw_id = #{sw_id}
+		   AND state = '2';
+	</select>
+	
+	<!-- 하나의 기업의 모든 SW 라이센스 1년치 -->
+	<select id="countAllLic" parameterType="Integer" 
+		resultType="smartlock.statistics.vo.StatisticsMonthlyVO">
+		<![CDATA[
+		SELECT sw_id, sw_name, start_date
+		FROM license, software
+		WHERE license.sw_id = software.id
+        AND sw_id = ANY(SELECT id FROM software WHERE corp_id = #{id})
+        AND start_date >= date_add(now(), interval -12 month)
+        AND start_date <= curdate()
+        ORDER BY sw_name ASC;
+        ]]>
+	</select>
+	
+	<!-- 하나의 기업의 하나의 SW 라이센스 1년치 -->
+	<select id="countLicBySW" parameterType="java.util.Map"
+		resultType="smartlock.statistics.vo.StatisticsMonthlyVO">
+		<![CDATA[
+		SELECT sw_id, sw_name, start_date
+		FROM license, software
+		WHERE license.sw_id = software.id
+        AND sw_id = ANY(SELECT id FROM software WHERE corp_id = #{corp_id})
+        AND sw_id = #{sw_id}
+        AND start_date >= date_add(now(), interval -12 month)
+        AND start_date <= curdate();
+        ]]>
+	</select>
+</mapper>
